@@ -1,0 +1,34 @@
+@use 'sass:map';
+@use '../settings/tokens';
+
+@function -token($map, $key, $prefix) {
+  @if not map.has-key($map, $key) {
+    @error 'Unknown #{$prefix} token `#{$key}`.';
+  }
+
+  @return var(--#{$prefix}-#{$key});
+}
+
+@function theme-color($name) {
+  @return -token(map.get(tokens.$themes, light), $name, color);
+}
+
+@function space($step) {
+  @return -token(tokens.$spaces, $step, space);
+}
+
+@function size($name) {
+  @return -token(tokens.$sizes, $name, size);
+}
+
+@function font-weight($name) {
+  @return -token(tokens.$font-weights, $name, font-weight);
+}
+
+@function duration($name) {
+  @return -token(tokens.$durations, $name, duration);
+}
+
+@function opacity($name) {
+  @return -token(tokens.$opacities, $name, opacity);
+}

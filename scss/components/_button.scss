@@ -1,0 +1,42 @@
+@use '../tools/functions' as fn;
+@use '../tools/mixins' as mx;
+
+.button {
+  width: 100%;
+  min-height: fn.size(control-height);
+
+  // Transparent border keeps the edge in forced-colours mode; padding gives its width back.
+  padding: calc(#{fn.space(2)} - #{fn.size(border)}) calc(#{fn.space(8)} - #{fn.size(border)});
+  border: fn.size(border) solid transparent;
+  border-radius: fn.size(radius);
+  background-color: fn.theme-color(primary);
+  color: fn.theme-color(on-primary);
+  font: inherit;
+  font-weight: fn.font-weight(semibold);
+  cursor: pointer;
+
+  @include mx.media(md) {
+    width: auto;
+  }
+}
+
+.button:disabled {
+  opacity: fn.opacity(disabled);
+  cursor: progress;
+}
+
+// The transition lives on hover only, so a theme flip swaps colours instantly (no low-contrast mid-way frames).
+.button:hover:enabled {
+  background-color: fn.theme-color(primary-hover);
+  transition: background-color fn.duration(fast);
+}
+
+.button-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: fn.theme-color(primary);
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}

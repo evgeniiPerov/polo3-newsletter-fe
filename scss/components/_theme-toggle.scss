@@ -1,0 +1,34 @@
+@use '../tools/functions' as fn;
+@use '../tools/mixins' as mx;
+
+// Quiet secondary control. Its label names the mode it switches to; CSS shows the one label that fits the theme.
+.theme-toggle {
+  min-width: fn.size(target);
+  min-height: fn.size(target);
+  padding: fn.space(2) fn.space(3);
+  border: fn.size(border) solid fn.theme-color(border);
+  border-radius: fn.size(radius);
+  background-color: fn.theme-color(surface);
+  color: fn.theme-color(text);
+  font: inherit;
+  font-size: fn.size(text-sm);
+  cursor: pointer;
+}
+
+.theme-toggle:hover {
+  border-color: fn.theme-color(text-muted);
+}
+
+.theme-toggle-label-light {
+  display: none;
+
+  @include mx.dark-theme {
+    display: inline;
+  }
+}
+
+.theme-toggle-label-dark {
+  @include mx.dark-theme {
+    display: none;
+  }
+}

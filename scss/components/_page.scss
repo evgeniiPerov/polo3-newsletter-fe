@@ -1,0 +1,39 @@
+@use '../tools/functions' as fn;
+@use '../tools/mixins' as mx;
+
+// The sheet: fills the screen on phones, a card on the page background from md.
+.page {
+  min-block-size: fn.size(fill-screen);
+  max-width: fn.size(form-max);
+  margin-inline: auto;
+  padding: fn.space(6);
+  background-color: fn.theme-color(surface);
+
+  @include mx.media(md) {
+    min-block-size: auto;
+    margin-block: fn.space(8);
+    padding: fn.space(8);
+    border: fn.size(border) solid fn.theme-color(border-subtle);
+    border-radius: fn.size(radius-lg);
+    box-shadow: 0 fn.space(1) fn.space(6) fn.theme-color(shadow);
+  }
+}
+
+.page-intro {
+  color: fn.theme-color(text-muted);
+  font-size: fn.size(text-lg);
+}
+
+// Heading row: the heading first, the theme toggle at the inline end; on narrow screens the toggle wraps below.
+.page-header {
+  display: flex;
+  flex-wrap: wrap;
+  gap: fn.space(3);
+  align-items: center;
+  justify-content: space-between;
+  margin-block-end: fn.space(3);
+}
+
+.page-title {
+  margin-block-end: 0;
+}

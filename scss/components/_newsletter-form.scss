@@ -1,0 +1,11 @@
+@use '../tools/functions' as fn;
+
+// Both roots toggle `hidden`, so neither sets `display`.
+.newsletter-form,
+.newsletter-success {
+  margin-block-start: fn.space(6);
+}
+
+.newsletter-success {
+  overflow-wrap: anywhere;
+}

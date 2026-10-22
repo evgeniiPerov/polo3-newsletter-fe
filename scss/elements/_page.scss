@@ -1,0 +1,40 @@
+@use '../tools/functions' as fn;
+@use '../tools/mixins' as mx;
+
+body {
+  margin: 0;
+  background-color: fn.theme-color(page);
+  color: fn.theme-color(text);
+  font-family: system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: fn.size(text-base);
+  line-height: fn.size(line);
+}
+
+h1,
+h2 {
+  margin-block: 0 fn.space(3);
+  font-weight: fn.font-weight(bold);
+  line-height: fn.size(line-tight);
+  letter-spacing: fn.size(tracking-tight);
+}
+
+h1 {
+  font-size: fn.size(text-2xl);
+}
+
+h2 {
+  font-size: fn.size(text-xl);
+}
+
+p {
+  margin-block: 0 fn.space(4);
+}
+
+a {
+  color: fn.theme-color(primary);
+  text-decoration: underline;
+}
+
+:focus-visible {
+  @include mx.focus-ring;
+}

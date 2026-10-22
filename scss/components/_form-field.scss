@@ -1,0 +1,81 @@
+@use 'sass:string';
+@use '../tools/functions' as fn;
+
+.form-field {
+  margin-block-end: fn.space(6);
+}
+
+// The reserved error line is part of the gap below these fields, so the bottom margin shrinks to keep the empty
+// form's rhythm while a shown error still has room before the next label.
+.form-field:has(.form-field-error) {
+  margin-block-end: fn.space(2);
+}
+
+.form-field-label {
+  display: block;
+  margin-block-end: fn.space(2);
+  font-weight: fn.font-weight(semibold);
+}
+
+.form-field-required,
+.form-field-hint {
+  color: fn.theme-color(text-muted);
+  font-size: fn.size(text-sm);
+  font-weight: fn.font-weight(regular);
+}
+
+.form-field-hint {
+  margin-block: fn.space(1) 0;
+}
+
+.form-field-input {
+  width: 100%;
+  min-height: fn.size(control-height);
+  padding: fn.space(2) fn.space(3);
+  border: fn.size(border) solid fn.theme-color(border);
+  border-radius: fn.size(radius);
+  background-color: fn.theme-color(bg);
+  color: fn.theme-color(text);
+  font: inherit;
+}
+
+.form-field-input:hover {
+  border-color: fn.theme-color(text-muted);
+}
+
+// One line is always reserved, so an error appearing on blur moves nothing below it: the control under the
+// pointer stays put and the first click lands. The top gap clears the focus ring of the input above.
+.form-field-error {
+  min-height: calc(#{fn.size(text-sm)} * #{fn.size(line)});
+  margin: fn.space(2) 0 0;
+  color: fn.theme-color(error);
+  font-size: fn.size(text-sm);
+  font-weight: fn.font-weight(semibold);
+}
+
+.form-field.is-invalid .form-field-input {
+  border-width: fn.size(border-strong);
+  border-color: fn.theme-color(error);
+}
+
+.form-field.is-invalid .form-field-error {
+  display: flex;
+  gap: fn.space(2);
+  align-items: center;
+}
+
+.form-field.is-invalid .form-field-error::before {
+  // Plain "!" is the fallback for browsers without alt text in content.
+  // Sass would compact `"!" / ""` to `"!"/""`; unquote keeps the spec's spacing.
+  content: "!";
+  content: string.unquote('"!" / ""');
+  display: inline-grid;
+  flex: none;
+  place-items: center;
+  width: fn.size(text-lg);
+  height: fn.size(text-lg);
+  border-radius: fn.size(round);
+  background-color: fn.theme-color(error);
+  color: fn.theme-color(bg);
+  font-size: fn.size(text-sm);
+}

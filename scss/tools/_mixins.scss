@@ -1,0 +1,31 @@
+@use 'sass:map';
+@use '../settings/tokens';
+@use 'functions' as fn;
+
+@mixin media($name) {
+  @if not map.has-key(tokens.$breakpoints, $name) {
+    @error 'Unknown breakpoint `#{$name}`.';
+  }
+
+  @media (width >= map.get(tokens.$breakpoints, $name)) {
+    @content;
+  }
+}
+
+// Rules for the dark theme, matching generic/_root: system dark without a stored light choice, or a stored dark choice.
+@mixin dark-theme {
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) & {
+      @content;
+    }
+  }
+
+  :root[data-theme="dark"] & {
+    @content;
+  }
+}
+
+@mixin focus-ring {
+  outline: fn.size(focus-width) solid fn.theme-color(focus);
+  outline-offset: fn.size(focus-offset);
+}

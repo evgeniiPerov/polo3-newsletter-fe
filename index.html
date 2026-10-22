@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Odběr novinek</title>
+  <meta name="description" content="Přihlaste se k odběru novinek a akcí z kancelářského sortimentu, který vás zajímá.">
+  <link rel="icon" href="data:,">
+  <script src="js/theme.js"></script>
+  <link rel="stylesheet" href="css/main.css">
+  <script src="js/newsletter-form.js" defer></script>
+</head>
+<body>
+  <main class="page">
+    <div class="page-header">
+      <h1 class="page-title">Odběr novinek</h1>
+      <button type="button" class="theme-toggle js-theme-toggle"><span class="theme-toggle-label theme-toggle-label-dark">Přepnout na tmavý režim</span><span class="theme-toggle-label theme-toggle-label-light">Přepnout na světlý režim</span></button>
+    </div>
+    <p class="page-intro">Jednou za čas vám pošleme e-mail s novinkami a akcemi ze sortimentu, který vás zajímá.</p>
+
+    <div class="alert alert-error js-server-error" role="alert" hidden></div>
+
+    <form id="newsletter-form" class="newsletter-form" data-role="polonewsletterform" method="post" novalidate>
+      <div class="form-field js-field">
+        <label class="form-field-label" for="email">E-mail <span class="form-field-required">(povinné)</span></label>
+        <input id="email" class="form-field-input" name="email" type="email" autocomplete="email" required aria-describedby="email-error">
+        <p id="email-error" class="form-field-error js-field-error" role="alert"></p>
+      </div>
+
+      <div class="form-field js-field">
+        <label class="form-field-label" for="name">Jméno</label>
+        <input id="name" class="form-field-input" name="name" type="text" autocomplete="given-name" maxlength="100" aria-describedby="name-hint name-error">
+        <p id="name-hint" class="form-field-hint">(nepovinné, max. 100 znaků)</p>
+        <p id="name-error" class="form-field-error js-field-error" role="alert"></p>
+      </div>
+
+      <div class="form-field">
+        <fieldset class="checkbox-group">
+          <legend class="checkbox-group-legend">Zajímá mě</legend>
+          <div class="checkbox-group-list">
+            <label class="checkbox-tile" for="interest-office-supplies">
+              <input id="interest-office-supplies" class="checkbox-input" name="interests" type="checkbox" value="office-supplies">
+              Kancelářské potřeby
+            </label>
+            <label class="checkbox-tile" for="interest-furniture">
+              <input id="interest-furniture" class="checkbox-input" name="interests" type="checkbox" value="furniture">
+              Nábytek
+            </label>
+            <label class="checkbox-tile" for="interest-drugstore">
+              <input id="interest-drugstore" class="checkbox-input" name="interests" type="checkbox" value="drugstore">
+              Drogerie
+            </label>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="form-field js-field">
+        <div class="checkbox">
+          <input id="consent" class="checkbox-input" name="consent" type="checkbox" required aria-describedby="consent-error">
+          <label for="consent">Souhlasím s <a href="podminky.html">podmínkami zpracování osobních údajů</a> <span class="form-field-required">(povinné)</span></label>
+        </div>
+        <p id="consent-error" class="form-field-error js-field-error" role="alert"></p>
+      </div>
+
+      <button class="button js-submit" type="submit">Odeslat</button>
+      <p class="visually-hidden js-status" aria-live="polite"></p>
+    </form>
+
+    <section class="newsletter-success js-success" aria-labelledby="success-title" hidden>
+      <h2 id="success-title" class="js-success-title" tabindex="-1">Děkujeme za přihlášení</h2>
+      <p class="js-success-message"></p>
+      <button class="button-link js-reset" type="button">Přihlásit další e-mail</button>
+    </section>
+  </main>
+</body>
+</html>

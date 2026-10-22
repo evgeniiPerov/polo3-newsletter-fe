@@ -1,0 +1,88 @@
+// Design tokens: the only place raw design values live. Components read them through tools/functions.
+// Contrast: text tokens ≥ 4.5:1 and UI tokens (border, primary, focus) ≥ 3:1 on page, surface and tile-checked.
+$themes: (
+  light: (
+    page: rgb(236 240 244),
+    surface: rgb(255 255 255),
+    bg: rgb(255 255 255),
+    text: rgb(26 26 26),
+    text-muted: rgb(85 91 102),
+    border: rgb(118 118 118),
+    border-subtle: rgb(214 220 228),
+    primary: rgb(11 87 208),
+    primary-hover: rgb(8 66 160),
+    on-primary: rgb(255 255 255),
+    tile-checked: rgb(232 240 254),
+    error: rgb(179 38 30),
+    error-surface: rgb(253 236 234),
+    focus: rgb(11 87 208),
+    shadow: rgb(16 24 40 / 8%),
+  ),
+  dark: (
+    page: rgb(16 18 22),
+    surface: rgb(28 31 36),
+    bg: rgb(18 18 18),
+    text: rgb(241 241 241),
+    text-muted: rgb(184 188 196),
+    border: rgb(142 142 142),
+    border-subtle: rgb(48 53 61),
+    primary: rgb(138 180 248),
+    primary-hover: rgb(166 198 250),
+    on-primary: rgb(11 26 51),
+    tile-checked: rgb(32 48 78),
+    error: rgb(242 139 130),
+    error-surface: rgb(58 29 27),
+    focus: rgb(138 180 248),
+    shadow: rgb(0 0 0 / 40%),
+  ),
+);
+$spaces: (
+  1: 0.25rem,
+  2: 0.5rem,
+  3: 0.75rem,
+  4: 1rem,
+  6: 1.5rem,
+  8: 2rem,
+);
+$sizes: (
+  text-sm: 0.875rem,
+  text-base: 1rem,
+  text-lg: 1.125rem,
+  text-xl: 1.5rem,
+  text-2xl: 2rem,
+  tracking-tight: -0.01em,
+  form-max: 40rem,
+  fill-screen: 100dvb,
+  control: 1.5rem,
+  control-height: 3rem,
+  target: 2.75rem,
+  border: 0.0625rem,
+  border-strong: 0.125rem,
+  border-accent: 0.25rem,
+  focus-width: 0.1875rem,
+  focus-offset: 0.125rem,
+  radius: 0.375rem,
+  radius-lg: 0.75rem,
+  round: 50%,
+  line: 1.5,
+  line-tight: 1.2,
+);
+$font-weights: (
+  regular: 400,
+  semibold: 600,
+  bold: 700,
+);
+$durations: (
+  fast: 150ms,
+);
+
+// Under prefers-reduced-motion: reduce, emitted over $durations by generic/_root.
+$durations-reduced: (
+  fast: 0s,
+);
+$opacities: (
+  disabled: 0.7,
+);
+$breakpoints: (
+  md: 48em,
+);

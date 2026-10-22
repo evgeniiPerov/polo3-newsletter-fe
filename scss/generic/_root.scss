@@ -1,0 +1,70 @@
+@use 'sass:color';
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:string';
+@use '../settings/tokens';
+
+// Sass prints colours in legacy comma syntax; write modern space-separated rgb() instead.
+@function -modern-rgb($value) {
+  $channels: color.channel($value, 'red') color.channel($value, 'green') color.channel($value, 'blue');
+  $alpha: color.channel($value, 'alpha');
+
+  @if $alpha < 1 {
+    @return string.unquote('rgb(#{$channels} / #{math.percentage($alpha)})');
+  }
+
+  @return string.unquote('rgb(#{$channels})');
+}
+
+@mixin -theme-properties($theme) {
+  @each $key, $value in map.get(tokens.$themes, $theme) {
+    --color-#{$key}: #{-modern-rgb($value)};
+  }
+}
+
+@mixin -custom-properties($map, $prefix) {
+  @each $key, $value in $map {
+    --#{$prefix}-#{$key}: #{$value};
+  }
+}
+
+// Dark theme: color-scheme travels with the tokens so native controls (checkbox, scrollbar) match.
+@mixin -dark-theme {
+  color-scheme: dark;
+
+  @include -theme-properties(dark);
+}
+
+// Light is the default; a stored choice (`data-theme`, set by js/theme.js) overrides the system scheme.
+:root {
+  color-scheme: light;
+
+  @include -theme-properties(light);
+  @include -custom-properties(tokens.$spaces, space);
+  @include -custom-properties(tokens.$sizes, size);
+  @include -custom-properties(tokens.$font-weights, font-weight);
+  @include -custom-properties(tokens.$durations, duration);
+  @include -custom-properties(tokens.$opacities, opacity);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    @include -dark-theme;
+  }
+}
+
+:root[data-theme="dark"] {
+  @include -dark-theme;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    @include -custom-properties(tokens.$durations-reduced, duration);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}

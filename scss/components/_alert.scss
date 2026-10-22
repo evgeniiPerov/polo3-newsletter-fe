@@ -1,0 +1,14 @@
+@use '../tools/functions' as fn;
+
+// No `display` here: the element toggles `hidden`, and an author display would override it.
+.alert {
+  margin-block-end: fn.space(6);
+  padding: fn.space(4);
+  border-radius: fn.size(radius);
+}
+
+.alert-error {
+  border-inline-start: fn.size(border-accent) solid fn.theme-color(error);
+  background-color: fn.theme-color(error-surface);
+  color: fn.theme-color(text);
+}

@@ -1,0 +1,32 @@
+{
+  "name": "polo3-fe",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20.19"
+  },
+  "scripts": {
+    "build:css": "sass --no-source-map --style=expanded scss/main.scss css/main.css && stylelint --fix css/main.css",
+    "watch:css": "sass --no-source-map --style=expanded --watch scss/main.scss css/main.css",
+    "lint:css": "stylelint \"scss/**/*.scss\" css/main.css",
+    "lint:js": "eslint .",
+    "lint:html": "java -jar node_modules/vnu-jar/build/dist/vnu.jar --errors-only index.html podminky.html",
+    "lint:dup": "jscpd --min-lines 10 --threshold 0 js scss",
+    "lint:forbidden": "node scripts/check-forbidden.js",
+    "test:e2e": "playwright test",
+    "check": "npm run build:css && npm run lint:css && npm run lint:js && npm run lint:html && npm run lint:dup && npm run lint:forbidden && npm run test:e2e",
+    "screenshots": "node scripts/screenshots.js"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.64.1",
+    "eslint": "^10.13.0",
+    "globals": "^17.13.0",
+    "jscpd": "^5.4.2",
+    "sass": "^1.106.1",
+    "stylelint": "^17.16.0",
+    "stylelint-config-standard-scss": "^17.0.0",
+    "vnu-jar": "^26.10.12"
+  }
+}
